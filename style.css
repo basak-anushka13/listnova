@@ -557,13 +557,13 @@ html, body {
 }
 @media (max-width: 600px) {
   .navbar {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     padding: 15px 10px;
   }
 
   .nav-links {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     width: 100%;
   }
