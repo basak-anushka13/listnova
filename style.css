@@ -205,15 +205,25 @@ html, body {
   pointer-events: none;
 }
 @keyframes flyAndNest {
-  0%, 100% {
-    left: -100px;
+  0% {
+    top: 100px;     /* higher start */
+    left: -110px;
+  }
+  40% {
+    top: 150px;     /* lower perch position */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  60% {
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  100% {
     top: 80px;
+    left: 110%;
   }
-  40%, 60% {
-    left: calc(50% - 40px);  /* center horizontally accounting for bird width */
-    top: 150px;
-  }
-}
+} 
 .features, .about {
   text-align: center;
   padding: 60px 20px;
