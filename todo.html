@@ -208,11 +208,10 @@ const taskTime = document.getElementById("dueTime").value;
 function exportTasksAsText() {
   let lines = [];
   document.querySelectorAll("#taskList li").forEach(li => {
-    const taskSpan = li.querySelector("span");
-    const taskText = taskSpan ? taskSpan.textContent.trim().replace(/\s+/g, " ") : "Untitled Task";
+    const task = li.dataset.taskText || "Unnamed Task";
     const datetime = li.dataset.datetime ? li.dataset.datetime.replace("T", " ").slice(0, 16) : "No time set";
     const status = li.classList.contains("completed") ? "✔️" : "❌";
-    lines.push(`${status} ${taskText} — ${datetime}`);
+    lines.push(`${task} | ${datetime} | ${status}`);
   });
 
   const content = lines.join("\n");
