@@ -89,4 +89,7 @@ renderTasks();
       }
     });
   });
-
+window.addEventListener('load', () => {
+  document.body.style.overflowX = 'hidden';
+  document.body.style.maxWidth = '100vw';
+});
