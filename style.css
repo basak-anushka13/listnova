@@ -168,6 +168,7 @@ body.happy-sky {
 }
 html, body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
   overflow-y: auto;
   margin: 0;
   padding: 0;
@@ -189,6 +190,8 @@ html, body {
   left: -120px;
   z-index: 5;
   animation: flyAndNest 8s ease-in-out infinite;
+  pointer-events: none;
+  will-change: transform;
 }
 @keyframes flyAndNest {
   0% {
