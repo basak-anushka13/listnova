@@ -85,8 +85,8 @@ input[type="time"] {
   <script>
     function addTask() {
       const taskInput = document.getElementById("taskInput");
-      const taskDate = document.getElementById("taskDate").value;
-      const taskTime = document.getElementById("taskTime").value;
+      const taskDate = document.getElementById("dueDate").value;
+const taskTime = document.getElementById("dueTime").value;
       const task = taskInput.value.trim();
 
       if (task) {
@@ -119,6 +119,19 @@ input[type="time"] {
         document.getElementById("taskDate").value = "";
         document.getElementById("taskTime").value = "";
       }
+      taskText.onclick = () => {
+  li.classList.toggle("completed");
+  applyCurrentFilter();
+
+  // 🎉 Confetti when completed
+  if (li.classList.contains("completed")) {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  }
+};
     }
 
     // Filter Logic
@@ -187,19 +200,6 @@ input[type="time"] {
         }
       });
     }
-taskText.onclick = () => {
-  li.classList.toggle("completed");
-  applyCurrentFilter();
-
-  // 🎉 Confetti when completed
-  if (li.classList.contains("completed")) {
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-  }
-};
     if ("Notification" in window) {
       Notification.requestPermission().then(permission => {
         console.log("Notification permission:", permission);
@@ -208,10 +208,11 @@ taskText.onclick = () => {
 function exportTasksAsText() {
   let lines = [];
   document.querySelectorAll("#taskList li").forEach(li => {
-    const task = li.dataset.taskText || li.innerText.trim();
+    const taskSpan = li.querySelector("span");
+    const taskText = taskSpan ? taskSpan.textContent.trim().replace(/\s+/g, " ") : "Untitled Task";
     const datetime = li.dataset.datetime ? li.dataset.datetime.replace("T", " ").slice(0, 16) : "No time set";
     const status = li.classList.contains("completed") ? "✔️" : "❌";
-    lines.push(`${status} ${task} — ${datetime}`);
+    lines.push(`${status} ${taskText} — ${datetime}`);
   });
 
   const content = lines.join("\n");
