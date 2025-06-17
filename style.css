@@ -557,26 +557,33 @@ html, body {
 }
 @media (max-width: 600px) {
   .navbar {
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-wrap: wrap;              /* Allow items to wrap to next line */
+    justify-content: center;      /* Center everything */
     padding: 10px;
   }
 
   .logo {
-    font-size: 20px;  /* Make "ListNova" smaller */
+    font-size: 20px !important;   /* Reduce logo size */
   }
 
-  .nav-links li {
-    margin: 0 5px;
+  .nav-links {
+    flex-wrap: wrap;              /* Wrap nav items too */
+    gap: 8px;                     /* Tighter spacing */
+    width: 100%;
+    justify-content: center;
   }
 
   .nav-links a {
-    font-size: 14px; /* Smaller font for Home, Menu, Contact */
+    font-size: 14px !important;   /* Smaller nav link text */
+    padding: 6px 8px;
   }
 
   .dropdown-content {
-    width: 150px;
+    position: absolute;
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
+    width: auto;                  /* Auto-width to fit content */
+    max-width: 90vw;
   }
 }
