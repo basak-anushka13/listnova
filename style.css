@@ -555,3 +555,23 @@ html, body {
   background: linear-gradient(45deg, #d0f1ff, #ffe0f7);
   transform: scale(1.05);
 }
+@media (max-width: 600px) {
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    background: #fff;
+    padding: 10px;
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
