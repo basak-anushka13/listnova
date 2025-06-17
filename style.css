@@ -556,22 +556,35 @@ html, body {
   transform: scale(1.05);
 }
 @media (max-width: 600px) {
-  .nav-links {
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-    background: #fff;
-    padding: 10px;
-    position: absolute;
-    top: 70px;
-    left: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    z-index: 1000;
-  }
-
   .navbar {
     flex-direction: column;
     align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+    padding: 10px 0;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+  }
+
+  .dropdown-content {
+    position: relative;
+    top: 0;
+    left: 0;
+    border: 1px dashed #ffc3a0;
+    box-shadow: none;
+    padding-left: 15px;
   }
 }
