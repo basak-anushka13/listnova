@@ -208,22 +208,18 @@ const taskTime = document.getElementById("dueTime").value;
 function exportTasksAsText() {
   let lines = [];
   document.querySelectorAll("#taskList li").forEach(li => {
-    const task = li.dataset.taskText || "Unnamed Task";
-    const datetime = li.dataset.datetime ? li.dataset.datetime.replace("T", " ").slice(0, 16) : "No time set";
-    const status = li.classList.contains("completed") ? "✔️" : "❌";
+    let task = li.dataset.taskText || "";
+    let datetime = li.dataset.datetime?.replace("T", " ").slice(0, 16) || "";
+    let status = li.classList.contains("completed") ? "✔️" : "❌";
     lines.push(`${status} ${task} — ${datetime}`);
   });
 
-  const content = lines.join("\n");
-  const blob = new Blob([content], { type: "text/plain" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
+  let blob = new Blob([lines.join("\n")], { type: "text/plain" });
+  let a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
   a.download = "My_Tasks_List.txt";
   a.click();
-  URL.revokeObjectURL(url);
 }
-
   </script>
 <button onclick="exportTasksAsText()" class="export-btn">📄 Export as Text</button>
 
