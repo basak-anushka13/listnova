@@ -183,6 +183,7 @@ html, body {
   width: 100%;
   pointer-events: none;
   z-index: 2;
+  overflow-x: hidden;
 }
 
 .fly-bird {
@@ -194,6 +195,7 @@ html, body {
   animation: flyAndNest 8s ease-in-out infinite;
   pointer-events: none;
   will-change: transform;
+  overflow-x: clip; 
 }
 @keyframes flyAndNest {
   0% {
