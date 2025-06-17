@@ -182,8 +182,6 @@ html, body {
   margin: 0;
   padding: 0;
   max-width: 100vw;
-  overflow-x: hidden;         /* Prevent side-scrolling */
-  position: relative;
 }
 
 .bird-container {
@@ -202,7 +200,6 @@ html, body {
   left: -120px;
   z-index: 5;
   animation: flyAndNest 8s ease-in-out infinite;
-  pointer-events: none;
 }
 @keyframes flyAndNest {
   0% {
