@@ -96,6 +96,8 @@ body.happy-sky {
   text-align: center;
   padding: 20px;
 position: relative;
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 .hero h1.animate-title {
@@ -185,7 +187,7 @@ html, body {
 
 .fly-bird {
   position: absolute;
-  width: 100px; /* bigger bird */
+  width: 90px; /* bigger bird */
   top: 80px;
   left: -120px;
   z-index: 5;
@@ -197,7 +199,7 @@ html, body {
 @keyframes flyAndNest {
   0% {
     top: 100px;     /* higher start */
-    left: -120px;
+    left: -110px;
   }
   40% {
     top: 150px;     /* lower perch position */
@@ -211,7 +213,7 @@ html, body {
   }
   100% {
     top: 80px;
-    left: 120%;
+    left: 110%;
   }
 }
 .features, .about {
