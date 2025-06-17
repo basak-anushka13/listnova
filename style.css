@@ -34,7 +34,7 @@ body.happy-sky {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 30px;
+  gap: 10px;
   position: relative;
 }
 
@@ -557,30 +557,26 @@ html, body {
 }
 @media (max-width: 600px) {
   .navbar {
-    flex-direction: row;
-    align-items: center;
-    padding: 15px 10px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
   }
 
-  .nav-links {
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
+  .logo {
+    font-size: 20px;  /* Make "ListNova" smaller */
   }
 
   .nav-links li {
-    width: 100%;
-    text-align: center;
+    margin: 0 5px;
+  }
+
+  .nav-links a {
+    font-size: 14px; /* Smaller font for Home, Menu, Contact */
   }
 
   .dropdown-content {
+    width: 150px;
+    left: 50%;
     transform: translateX(-50%);
-    position: absolute;
-  top: 100%;
-  left: 50%;
-  width: 160px;
-  max-width: 90vw;
-  background: #fffaf0;
-  z-index: 999;
   }
 }
