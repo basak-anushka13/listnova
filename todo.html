@@ -211,7 +211,7 @@ function exportTasksAsText() {
     const task = li.dataset.taskText || "Unnamed Task";
     const datetime = li.dataset.datetime ? li.dataset.datetime.replace("T", " ").slice(0, 16) : "No time set";
     const status = li.classList.contains("completed") ? "✔️" : "❌";
-    lines.push(`${task} | ${datetime} | ${status}`);
+    lines.push(`${status} ${task} — ${datetime}`);
   });
 
   const content = lines.join("\n");
