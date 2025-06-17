@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ListNova — To-Do</title>
+  <link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+  background: #d7fcd4;
+  border-left: 5px solid green;
+}
+.export-btn {
+  margin-top: 20px;
+  padding: 10px 16px;
+  background-color: #3b3b98;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+</style>
+</head>
+<body class="todo-page">
+  <header class="todo-header">
+    <h1>🌈 Your Daily List</h1>
+    <a href="index.html" class="back-home">← Back to Home</a>
+  </header>
+
+  <main class="todo-container">
+    <input type="text" id="taskInput" placeholder="What's on your mind?" required />
+    <div class="datetime-inputs">
+      <input type="date" id="taskDate" />
+      <input type="time" id="taskTime" />
+    </div>
+    <button onclick="addTask()">➕ Add</button>
+    <ul id="taskList"></ul>
+  </main>
+
+  <!-- Filter Buttons -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">🌈 All</button>
+    <button class="filter-btn" data-filter="completed">✅ Completed</button>
+    <button class="filter-btn" data-filter="pending">🕐 Pending</button>
+  </div>
+
+  <div class="done-wrapper">
+    <button id="finalDoneBtn" onclick="startReminders()" class="done-final-btn">
+      ✅ Done
+    </button>
+  </div>
+
+  <div id="successAnimation" class="success-hidden">
+    🎉 Reminders Activated! 🎉
+  </div>
+
+  <audio id="reminderSound" src="https://assets.mixkit.co/sfx/preview/mixkit-clear-announce-tones-2861.mp3" preload="auto"></audio>
+
+  <script>
+    function addTask() {
+      const taskInput = document.getElementById("taskInput");
+      const taskDate = document.getElementById("taskDate").value;
+      const taskTime = document.getElementById("taskTime").value;
+      const task = taskInput.value.trim();
+
+      if (task) {
+        const li = document.createElement("li");
+        li.classList.add("task");
+
+        const taskText = document.createElement("span");
+        taskText.innerHTML = `<strong>${task}</strong><br><small>${taskDate} ${taskTime}</small>`;
+        taskText.onclick = () => {
+          li.classList.toggle("completed");
+          applyCurrentFilter();
+        };
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "🗑️";
+        delBtn.classList.add("delete-btn");
+        delBtn.onclick = () => li.remove();
+
+        li.appendChild(taskText);
+        li.appendChild(delBtn);
+
+        // Save reminder info
+        li.dataset.datetime = `${taskDate}T${taskTime}`;
+        li.dataset.taskText = task;
+        li.dataset.reminded = "false";
+
+        document.getElementById("taskList").appendChild(li);
+
+        taskInput.value = "";
+        document.getElementById("taskDate").value = "";
+        document.getElementById("taskTime").value = "";
+      }
+    }
+
+    // Filter Logic
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelector('.filter-btn.active').classList.remove('active');
+        btn.classList.add('active');
+        applyCurrentFilter();
+      });
+    });
+
+    function applyCurrentFilter() {
+      const filter = document.querySelector('.filter-btn.active').dataset.filter;
+      const tasks = document.querySelectorAll('.task');
+
+      tasks.forEach(task => {
+        const isCompleted = task.classList.contains('completed');
+        if (filter === 'all') {
+          task.style.display = 'flex';
+        } else if (filter === 'completed') {
+          task.style.display = isCompleted ? 'flex' : 'none';
+        } else if (filter === 'pending') {
+          task.style.display = !isCompleted ? 'flex' : 'none';
+        }
+      });
+    }
+
+    // Reminder logic
+    setInterval(checkReminders, 1000);
+    let remindersStarted = false;
+
+    function startReminders() {
+      if (!remindersStarted) {
+        remindersStarted = true;
+        alert("✅ Reminders activated for all tasks!");
+        setInterval(checkReminders, 1000);
+      }
+    }
+
+    function checkReminders() {
+      const now = new Date();
+      document.querySelectorAll("#taskList li").forEach((li) => {
+        if (li.dataset.reminded === "true") return;
+
+        const timeStr = li.dataset.datetime;
+        if (!timeStr) return;
+
+        const taskTime = new Date(timeStr);
+        if (now >= taskTime) {
+          li.dataset.reminded = "true";
+
+          document.getElementById("reminderSound").play();
+
+          if (Notification.permission === "granted") {
+            new Notification("🔔 ListNova Reminder", {
+              body: `Don't forget: ${li.dataset.taskText}`,
+            });
+          }
+
+          if (confirm(`🔔 Reminder: ${li.dataset.taskText}\n\nSnooze 5 mins?`)) {
+            const snooze = new Date(now.getTime() + 5 * 60 * 1000);
+            li.dataset.datetime = snooze.toISOString();
+            li.dataset.reminded = "false";
+          }
+        }
+      });
+    }
+taskText.onclick = () => {
+  li.classList.toggle("completed");
+  applyCurrentFilter();
+
+  // 🎉 Confetti when completed
+  if (li.classList.contains("completed")) {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  }
+};
+    if ("Notification" in window) {
+      Notification.requestPermission().then(permission => {
+        console.log("Notification permission:", permission);
+      });
+    }
+function exportTasksAsText() {
+  let lines = [];
+  document.querySelectorAll("#taskList li").forEach(li => {
+    const task = li.dataset.taskText || li.innerText.trim();
+    const datetime = li.dataset.datetime ? li.dataset.datetime.replace("T", " ").slice(0, 16) : "No time set";
+    const status = li.classList.contains("completed") ? "✔️" : "❌";
+    lines.push(`${status} ${task} — ${datetime}`);
+  });
+
+  const content = lines.join("\n");
+  const blob = new Blob([content], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "My_Tasks_List.txt";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+  </script>
+<button onclick="exportTasksAsText()" class="export-btn">📄 Export as Text</button>
+
+</body>
+</html>

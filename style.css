@@ -1,0 +1,557 @@
+/* Base reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.happy-sky {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #87ceeb, #ffffff);
+  color: #333;
+  overflow-x: hidden;
+}
+
+.navbar {
+  background: url('flow.gif') no-repeat center center;
+  background-size: cover;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  z-index: 100;
+  position: relative;
+}
+
+.logo {
+  font-size: 2em;
+  color: #ff6ec4;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  position: relative;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-size: 1.1em;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: #ffe4d6;
+  color: #ff6f61;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fffaf0;
+  border: 2px dashed #ffc3a0;
+  border-radius: 10px;
+  padding: 10px 0;
+  min-width: 150px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+
+.dropdown-content li {
+  padding: 10px 20px;
+  white-space: nowrap;
+}
+
+.dropdown-content li a {
+  color: #444;
+  font-size: 1em;
+}
+
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+  display: block;
+}
+
+/* Hero Section */
+.hero {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+position: relative;
+}
+
+.hero h1.animate-title {
+  font-size: 64px;
+  color: #ff6ec4;
+  animation: float 3s ease-in-out infinite;
+}
+
+.hero p.animate-tagline {
+  font-size: 24px;
+  margin-top: 10px;
+  color: #555;
+  animation: float 4s ease-in-out infinite;
+}
+
+.start-btn {
+  background-color: #ffa500;
+  padding: 15px 30px;
+  border: none;
+  font-size: 18px;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  margin-top: 30px;
+  transition: transform 0.3s ease;
+}
+
+.start-btn:hover {
+  transform: scale(1.05);
+  background-color: #ff8c00;
+}
+
+.contact-section {
+  background-color: #f0fbff;
+  padding: 40px 20px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: #444;
+}
+
+.contact-section h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #0077b6;
+}
+
+.contact-section a {
+  color: #0077b6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-section a:hover {
+  text-decoration: underline;
+}
+.cute-footer {
+  background-color: #e0f7ff;
+  padding: 10px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85em;
+  color: #666;
+  border-top: 1px solid #b3ecff;
+}
+
+
+/* Floating text animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+html, body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.bird-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fly-bird {
+  position: absolute;
+  width: 100px; /* bigger bird */
+  top: 80px;
+  left: -120px;
+  z-index: 5;
+  animation: flyAndNest 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+
+@keyframes flyAndNest {
+  0% {
+    top: 100px;     /* higher start */
+    left: -120px;
+  }
+  40% {
+    top: 150px;     /* lower perch position */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  60% {
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  100% {
+    top: 80px;
+    left: 120%;
+  }
+}
+.features, .about {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #fff4ec; /* cheerful pastel background */
+  color: #333;
+  position: relative;
+  z-index: 1;
+}
+
+.features h2, .about h2 {
+  font-size: 2.5em;
+  color: #ff6f61;
+  margin-bottom: 30px;
+}
+
+.feature-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border: 2px dashed #ffa07a;
+  border-radius: 15px;
+  padding: 20px;
+  width: 220px;
+  font-size: 1.2em;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  background-color: #ffe4d6;
+  cursor: pointer;
+}
+
+.about p {
+  font-size: 1.1em;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+/* Background for To-Do Page */
+.todo-page {
+  background: linear-gradient(to bottom, #e0f7ff, #ffffff);
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Header Styling */
+.todo-header h1 {
+  font-size: 2.5em;
+  color: #ff6f61;
+  animation: floatTitle 2s ease-in-out infinite alternate;
+  margin-bottom: 5px;
+}
+
+@keyframes floatTitle {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
+}
+
+.back-home {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #0077b6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.back-home:hover {
+  color: #ff6f61;
+}
+/* Task Item with Delete Button */
+#taskList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  margin: 8px auto;
+  background: #fefefe;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Task Text (click to complete) */
+#taskList li span {
+  flex: 1;
+  text-align: left;
+}
+
+/* Delete Button */
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ff6f61;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: transform 0.2s ease;
+}
+
+.delete-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Completed Task Style */
+#taskList li.completed {
+  text-decoration: line-through;
+  background-color: #c8f7c5;
+  color: #555;
+}
+.todo-container input {
+  padding: 15px;
+  width: 95%;
+  max-width: 500px;
+  border: 2px solid #0077b6;
+  border-radius: 12px;
+  font-size: 1.1em;
+  margin: 10px auto;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.todo-container button {
+  padding: 14px 24px;
+  margin-top: 10px;
+  background-color: #ff6f61;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+/* Floating Placeholder Animation */
+.todo-container {
+  position: relative;
+}
+/* Wrapper for floating input */
+.input-wrapper {
+  position: relative;
+  width: 95%;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+/* Input box */
+#taskInput {
+  padding: 18px 12px 8px;
+  width: 100%;
+  font-size: 1.1em;
+  border: 2px solid #0077b6;
+  border-radius: 12px;
+  outline: none;
+}
+
+/* Animated floating label */
+.animated-placeholder {
+  position: absolute;
+  top: 16px;
+  left: 14px;
+  color: #888;
+  font-size: 1em;
+  pointer-events: none;
+  background: white;
+  padding: 0 4px;
+  transition: 0.3s ease all;
+}
+.input-group {
+  position: relative;
+  width: 95%;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+/* Input field */
+.input-group input[type="text"] {
+  width: 100%;
+  padding: 18px 12px;
+  font-size: 1.1em;
+  border: 2px solid #0077b6;
+  border-radius: 12px;
+  outline: none;
+  background-color: white;
+}
+
+/* Label initially centered vertically */
+.input-group label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: #888;
+  background: white;
+  padding: 0 6px;
+  pointer-events: none;
+  transition: 0.3s ease all;
+}
+#taskInput {
+  width: 95%;
+  max-width: 500px;
+  margin: 20px auto;
+  display: block;
+  padding: 18px 12px;
+  font-size: 1.1em;
+  border: 2px solid #0077b6;
+  border-radius: 12px;
+  outline: none;
+  background-color: white;
+}
+
+#taskInput::placeholder {
+  color: #888;
+  text-align: center;
+}
+
+/* Responsive: Full width on small screens */
+@media (max-width: 500px) {
+  .datetime-inputs input {
+    width: 90%;
+  }
+}
+
+/* Responsive Layout */
+@media (min-width: 600px) {
+  .todo-container input {
+    display: inline-block;
+    width: 60%;
+  }
+
+  .todo-container button {
+    display: inline-block;
+    width: auto;
+    margin-left: 10px;
+  }
+}
+.done-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.done-final-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  background: linear-gradient(45deg, #a0f1ff, #baffc9);
+  color: #333;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.done-final-btn:hover {
+  transform: scale(1.07);
+  background: linear-gradient(45deg, #baffc9, #a0f1ff);
+}
+
+/* Success animation text */
+#successAnimation {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 1.5em;
+  color: #2e7d32;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#successAnimation.show {
+  opacity: 1;
+  transform: scale(1.1);
+}
+.tips-section {
+  padding: 50px 20px;
+  background: #f5faff;
+  text-align: center;
+}
+
+.tips-section h2 {
+  font-size: 2em;
+  margin-bottom: 30px;
+  color: #0077b6;
+}
+
+.tips-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.tip-card {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  width: 250px;
+  font-size: 1.05em;
+  color: #333;
+  transition: transform 0.3s ease, background 0.3s ease;
+  cursor: default;
+}
+
+.tip-card:hover {
+  transform: scale(1.05) rotate(-1deg);
+  background: #e0f7ff;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+.filter-bar {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.filter-btn {
+  background: linear-gradient(45deg, #ffe0f7, #d0f1ff);
+  border: none;
+  padding: 10px 16px;
+  margin: 0 8px;
+  border-radius: 25px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: linear-gradient(45deg, #d0f1ff, #ffe0f7);
+  transform: scale(1.05);
+}
